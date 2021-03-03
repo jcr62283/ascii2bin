@@ -8,26 +8,31 @@
 /* Enhancements: None                   */
 /****************************************/
 
-#include stdio.h
-#include stdlib.h
+#include "stdio.h"
+#include "stdlib.h"
 
 #define byte unsigned char
+int read(int fildes, void* buf, size_t nbyte);
 
 int main(int argc, char* argv[], char** envp)
 {
-    offset = 30;
-    number = 0;
+    int offset = 30;
+    int number = 0;
 
-    int ascii_value = 0;
+    byte ascii_value[1];
 
     int retval = read(0, &ascii_value, 1);
 
     while (retval == 1)
     {
-        printf("%u\n", ascii_value);
+        printf("%d\n", ascii_value[0]);
 
-        if (ascii_value == )
-        digit = ascii_value - offset;
+        if (ascii_value[0] == 10)
+	{
+	    break;
+	}
+
+        int digit = ascii_value[0] - offset;
         number = (number << 1) + digit;
         retval = read(0, &ascii_value, 1);
     }
