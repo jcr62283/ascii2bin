@@ -31,7 +31,7 @@ int main(int argc, char* argv[], char** envp)
         int digit = readbyte - offset;
 
         /* Exit program if number entered is not in binary */
-        if (!(digit != 0 || digit != 1))
+        if (!(digit == 0 || digit == 1))
         {
             fprintf(stderr, "Error in input. Digit %d is not a binary digit.\n", digit);
             return 1;
