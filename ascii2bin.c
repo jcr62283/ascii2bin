@@ -16,7 +16,7 @@ int read(int fildes, void* buf, size_t nbyte);
 
 int main(int argc, char* argv[], char** envp)
 {
-    int offset = 30;
+    int offset = 48;
     int number = 0;
 
     byte ascii_value[1];
@@ -25,14 +25,20 @@ int main(int argc, char* argv[], char** envp)
 
     while (retval == 1)
     {
-        printf("%d\n", ascii_value[0]);
+	byte readbyte = ascii_value[0];
 
-        if (ascii_value[0] == 10)
+	if (!(readbyte == 10 || readbyte == 48 || readbyte == 49))
+	{
+	    fprintf(stderr, "Error in input. Digit %d is not a binary digit.\n", readbyte - offset);
+	    return 1;
+	}
+
+        if (readbyte == 10)
 	{
 	    break;
 	}
 
-        int digit = ascii_value[0] - offset;
+        int digit = readbyte - offset;
         number = (number << 1) + digit;
         retval = read(0, &ascii_value, 1);
     }
